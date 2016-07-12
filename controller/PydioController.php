@@ -30,7 +30,7 @@ class PydioController extends Pydio
 		}
 	}
 
-	public function add_pydio_path ($pydio_path)
+	public function add_pydio_path ($pydio_path, $pydio_url)
 	{
 		if (self::check_pydio_path()) {
 			$this->_send_json("You have already added a Pydio Path !!", null);
@@ -44,7 +44,12 @@ class PydioController extends Pydio
 		}
 		preg_match_all('/define\("(.*?)"/', $pydio_version, $pydio_version_matches);
 		if ($pydio_version_matches[1][0] === "AJXP_VERSION" && $pydio_version_matches[1][1] === "AJXP_VERSION_DATE" && $pydio_version_matches[1][2] === "AJXP_VERSION_REV" && $pydio_version_matches[1][3] === "AJXP_VERSION_DB") {
-			if (!file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "pydio_path", $pydio_path)) {
+			$pydio_server = file_get_contents($pydio_url);
+			if ($pydio_server !== '<?xml version="1.0" encoding="UTF-8"?><tree ><require_auth/></tree>') {
+				$this->_send_json("The URL is not redirected to a Pydio !!", null);
+				return false;
+			}
+			if (!file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "pydio_path", "path=" . $pydio_path . "\nurl=" . rtrim($pydio_url, "/") . "/")) {
 				$this->_send_json("Can't create the file to save your pydio path !! Maybe a permission problem ??", null);
 			} else {
 				$this->_send_json(null, null);
