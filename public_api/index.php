@@ -13,5 +13,10 @@
 */
 session_start();
 require '../autoload.php';
+use controller\PydioController;
+$pydio = new PydioController();
 switch ($_POST["action"]) {
+	case 'add_pydio_path':
+	$pydio->add_pydio_path($_POST["pydio_path"]);
+	break;
 }
