@@ -9,6 +9,7 @@
 * @category Controller
 * @package  Controller
 * @author   isma91 <ismaydogmus@gmail.com>
+* @author   devraph0 <https://github.com/devraph0>
 * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 function autoload($class) {
