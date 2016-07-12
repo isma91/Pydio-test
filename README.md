@@ -1,5 +1,5 @@
 # Pydio-test
-##A tool to test your Pydio or a new one !!
+##A tool to test your Pydio !!
 ###Test this project in a LAMP stack please !! 
 ------------------------------------------------------------  
 
