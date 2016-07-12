@@ -20,6 +20,11 @@ html,body {
 	font-family: 'Pacifico', cursive;
 	font-size: 2em;
 }
+#toast-container {
+	width: 100%;
+	margin: auto;
+	text-align: center;
+}
 .alert-success {
 	width: 100%;
 	margin: auto;
