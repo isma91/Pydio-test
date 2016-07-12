@@ -88,3 +88,6 @@ a:focus {
 	color: #FFFFFF;
 	text-decoration: none;
 }
+#display_pass {
+	cursor: pointer;
+}
