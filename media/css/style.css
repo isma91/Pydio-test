@@ -91,3 +91,9 @@ a:focus {
 #display_pass {
 	cursor: pointer;
 }
+#div_error {
+  	text-align: center;
+  	color: #FF0000;
+  	font-weight: bold;
+ 	font-size: 1.1em;
+ }
