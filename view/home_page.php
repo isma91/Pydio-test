@@ -14,11 +14,17 @@
             <h2 class="title">Please write the full path of your Pydio in the input !!</h2>
             <h3 class="title">Don't works for Pydio get from github !!</h3>
         </div>
+        <div class="row" id="div_error"></div>
         <div class="row">
             <div class="input-field">
-                <i class="material-icons prefix">location_searching</i>
+                <i class="material-icons prefix">folder</i>
                 <input id="pydio_path" type="text" name="pydio_path">
                 <label for="pydio_path">Path of your Pydio</label>
+            </div>
+            <div class="input-field">
+                <i class="material-icons prefix">http</i>
+                <input id="pydio_server_url" type="text" name="pydio_server_url">
+                <label for="pydio_server_url">Server URL of your Pydio</label>
             </div>
             <div class="row end_button">
             <button class="waves-effect btn-flat" id="validate_pydio_path">Validate</button>
