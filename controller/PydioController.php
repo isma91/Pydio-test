@@ -70,4 +70,23 @@ class PydioController extends Pydio
 		preg_match('/url=(.*?)$/', $pydio_path, $pydio_url);
 		return $pydio_url[1];
 	}
+
+	public function is_admin($login, $password)
+	{
+		$pydio_url = $this->_get_pydio_url();
+		$url_is_admin = "api/0/state/user/special_rights?format=json";
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $pydio_url . $url_is_admin);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/xml", "Ajxp-Force-Login: true"));
+		curl_setopt($curl, CURLOPT_USERPWD, $login . ":" . $password);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		$return = json_decode(curl_exec($curl), true);
+		curl_close($curl);
+		if ($return["special_rights"]["@is_admin"] == 1) {
+			return true;
+			$this->_send_json(null, null);
+		} else {
+			return false;
+		}
+	}
 }
