@@ -89,4 +89,12 @@ class PydioController extends Pydio
 			return false;
 		}
 	}
+
+	public function list_workspace ($login, $password)
+	{
+		if (!self::is_admin($login, $password)) {
+			$this->_send_json("You are not an admin in your Pydio !!", null);
+			return false;
+		}
+	}
 }
