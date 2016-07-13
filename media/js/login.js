@@ -5,6 +5,7 @@ $(document).ready(function () {
     "use strict";
     var path_to_ajax = "public_api/index.php";
     var div_error;
+    var list_ws;
     function press_enter(selector, go_function) {
         $(document).on("keyup", selector, function (event) {
             if (event.keyCode === 13) {
@@ -30,11 +31,14 @@ $(document).ready(function () {
         if (div_error !== "") {
             $("#div_error").html(div_error);
         } else {
-            $.post(path_to_ajax, {action: "list_workspace", login: $.trim($("#login").val()), password: $("#password").val()}, function(data, textStatus) {
+            $.post(path_to_ajax, {action: "login", login: $.trim($("#login").val()), password: $("#password").val()}, function(data, textStatus) {
                 if (textStatus === "success") {
                     data = JSON.parse(data);
-                    console.log(data);
                     if (data.error === null) {
+                        Materialize.toast("<p class='alert-success'>You are successfully loged !!<p>", 3000, "rounded alert-success");
+                        setTimeout(function () {
+                            window.location = "?page=list_ws";
+                        }, 1000);
                     } else {
                         Materialize.toast("<p class='alert-failed'>" + data.error + "<p>", 3000, "rounded alert-failed");
                     }

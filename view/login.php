@@ -5,13 +5,13 @@
     <meta name="description" content="A tool to test your Pydio or a new one" />
     <title>Welcome to Pydio-test !!</title>
     <?php include "media.html" ?>
-    <script src="media/js/test.js"></script>
+    <script src="media/js/login.js"></script>
 </head>
 <body>
     <div class="container" id="the_body">
         <div class="row mui-panel">
             <h1 class="title">Welcome to Pydio-test !!</h1>
-            <h2 class="title">You can test your Pydio here !!</h2>
+            <h2 class="title">Please Sign in to begin the test !!</h2>
             <h2 class="title">You must be an admin in Pydio to test it !!</h2>
         </div>
         <div class="row" id="div_error"></div>
@@ -31,7 +31,6 @@
                 <button class="waves-effect btn-flat" id="connexion">Connexion</button>
             </div>
         </div>
-        <div id="list_ws"></div>
     </div>
 </body>
 </html>
