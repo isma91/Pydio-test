@@ -22,4 +22,13 @@ switch ($_POST["action"]) {
 	case 'login':
 	$pydio->login($_POST["login"], $_POST["password"]);
 	break;
+	case 'logout':
+	$pydio->logout();
+	break;
+	case 'list_workspace':
+	$pydio->list_workspace();
+	break;
+	default:
+	echo json_encode(array("error" => "Not a valid action !!", "data" => null));
+	break;
 }
