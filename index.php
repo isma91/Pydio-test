@@ -14,18 +14,23 @@ session_start();
 require 'autoload.php';
 use controller\PydioController;
 $pydio_path_exist = PydioController::check_pydio_path();
+$is_connected = PydioController::is_connected();
 function go_to_view ($page) {
     if ($page === "home_page") {
-        if (PydioController::check_pydio_path() === true) {
-            include "./view/test.php";
-        } else {
+        if ($pydio_path_exist === true && $is_connected === false) {
+            include "./view/login.php";
+        } elseif ($pydio_path_exist === false && $is_connected === false) {
             include "./view/home_page.php";
-        }
+        } elseif ($is_connected === true) {
+            include "./view/list_ws.php";
+        } 
     } else {
-        if (PydioController::check_pydio_path() === true) {
-            include "./view/" . $page . ".php";
-        } else {
+        if ($pydio_path_exist === true && $is_connected === false) {
+            include "./view/login.php";
+        } elseif ($pydio_path_exist === false && $is_connected === false) {
             include "./view/home_page.php";
+        } elseif ($is_connected === true) {
+            include "./view/" . $page . ".php";
         }
     }
 }
@@ -34,8 +39,11 @@ if ($_GET) {
         case 'home':
         go_to_view("home_page");
         break;
-        case 'test':
-        go_to_view("test");
+        case 'login':
+        go_to_view("login");
+        break;
+        case 'list_ws':
+        go_to_view("list_ws");
         break;
         default:
         go_to_view('home_page');
