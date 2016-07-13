@@ -13,23 +13,21 @@
 session_start();
 require 'autoload.php';
 use controller\PydioController;
-$pydio_path_exist = PydioController::check_pydio_path();
-$is_connected = PydioController::is_connected();
 function go_to_view ($page) {
     if ($page === "home_page") {
-        if ($pydio_path_exist === true && $is_connected === false) {
+        if (PydioController::check_pydio_path() === true && PydioController::is_connected() === false) {
             include "./view/login.php";
-        } elseif ($pydio_path_exist === false && $is_connected === false) {
+        } elseif (PydioController::check_pydio_path() === false && PydioController::is_connected() === false) {
             include "./view/home_page.php";
-        } elseif ($is_connected === true) {
+        } elseif (PydioController::is_connected() === true) {
             include "./view/list_ws.php";
         } 
     } else {
-        if ($pydio_path_exist === true && $is_connected === false) {
+        if (PydioController::check_pydio_path() === true && PydioController::is_connected() === false) {
             include "./view/login.php";
-        } elseif ($pydio_path_exist === false && $is_connected === false) {
+        } elseif (PydioController::check_pydio_path() === false && PydioController::is_connected() === false) {
             include "./view/home_page.php";
-        } elseif ($is_connected === true) {
+        } elseif (PydioController::is_connected() === true) {
             include "./view/" . $page . ".php";
         }
     }
