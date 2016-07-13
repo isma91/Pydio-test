@@ -30,6 +30,18 @@ class PydioController extends Pydio
 		}
 	}
 
+	static public function is_connected ()
+	{
+		if (!self::check_pydio_path()) {
+			return false;
+		}
+		if (!empty($_SESSION["pydio_test_login"]) && !empty($_SESSION["pydio_test_password"])) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function add_pydio_path ($pydio_path, $pydio_url)
 	{
 		if (self::check_pydio_path()) {
@@ -104,6 +116,21 @@ class PydioController extends Pydio
 		} else {
 			return false;
 		}
+	}
+
+	public function login($login, $password)
+	{
+		if (!self::good_user_pass($login, $password)) {
+			$this->_send_json("Bad login or password !!", null);
+			return false;
+		}
+		if (!self::is_admin($login, $password)) {
+			$this->_send_json("You are not an admin in your Pydio !!", null);
+			return false;
+		}
+		$_SESSION["pydio_test_login"] = $login;
+		$_SESSION["pydio_test_password"] = $password;
+		$this->_send_json(null, null);
 	}
 
 	public function list_workspace ($login, $password)
