@@ -116,5 +116,15 @@ class PydioController extends Pydio
 			$this->_send_json("You are not an admin in your Pydio !!", null);
 			return false;
 		}
+		$pydio_url = $this->_get_pydio_url();
+		$url_list_workspace = "api/0/state/user/repositories?format=json";
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $pydio_url . $url_list_workspace);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/xml", "Ajxp-Force-Login: true"));
+		curl_setopt($curl, CURLOPT_USERPWD, $login . ":" . $password);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		$return = json_decode(curl_exec($curl), true);
+		curl_close($curl);
+		$this->_send_json(null, $return["repositories"]["repo"]);
 	}
 }
