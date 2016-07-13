@@ -63,7 +63,6 @@ class PydioController extends Pydio
 	private function _get_pydio_url ()
 	{
 		if (!self::check_pydio_path()) {
-			$this->_send_json("Pydio Path empty !!", null);
 			return false;
 		}
 		$pydio_path = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "pydio_path");
@@ -84,7 +83,6 @@ class PydioController extends Pydio
 		curl_close($curl);
 		if ($return["special_rights"]["@is_admin"] == 1) {
 			return true;
-			$this->_send_json(null, null);
 		} else {
 			return false;
 		}
