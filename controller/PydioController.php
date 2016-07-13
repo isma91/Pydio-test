@@ -70,6 +70,24 @@ class PydioController extends Pydio
 		return $pydio_url[1];
 	}
 
+	public function good_user_pass ($login, $password)
+	{
+		$pydio_url = $this->_get_pydio_url();
+		$url_api = "api/0/state/user?format=json";
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $pydio_url . $url_api);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/xml", "Ajxp-Force-Login: true"));
+		curl_setopt($curl, CURLOPT_USERPWD, $login . ":" . $password);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		$return = json_decode(curl_exec($curl), true);
+		curl_close($curl);
+		if ($return === null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public function is_admin($login, $password)
 	{
 		$pydio_url = $this->_get_pydio_url();
@@ -90,6 +108,10 @@ class PydioController extends Pydio
 
 	public function list_workspace ($login, $password)
 	{
+		if (!self::good_user_pass($login, $password)) {
+			$this->_send_json("Bad login or password !!", null);
+			return false;
+		}
 		if (!self::is_admin($login, $password)) {
 			$this->_send_json("You are not an admin in your Pydio !!", null);
 			return false;
