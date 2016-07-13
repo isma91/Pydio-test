@@ -92,8 +92,17 @@ a:focus {
 	cursor: pointer;
 }
 #div_error {
-  	text-align: center;
-  	color: #FF0000;
-  	font-weight: bold;
- 	font-size: 1.1em;
- }
+	text-align: center;
+	color: #FF0000;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+.collapsible-header {
+	text-align: center;
+}
+.collapsible-body {
+	text-align: initial;
+}
+.collapsible-body p {
+	padding: 0rem;
+}
