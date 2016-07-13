@@ -19,4 +19,7 @@ switch ($_POST["action"]) {
 	case 'add_pydio_path':
 	$pydio->add_pydio_path($_POST["pydio_path"], $_POST["pydio_url"]);
 	break;
+	case 'list_workspace':
+	$pydio->list_workspace($_POST["login"], $_POST["password"]);
+	break;
 }
