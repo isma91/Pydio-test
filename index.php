@@ -14,14 +14,14 @@ session_start();
 require 'autoload.php';
 use controller\PydioController;
 function go_to_view ($page) {
-    if ($page === "home_page") {
+    if ($page === "home_page" || $page === "login") {
         if (PydioController::check_pydio_path() === true && PydioController::is_connected() === false) {
             include "./view/login.php";
         } elseif (PydioController::check_pydio_path() === false && PydioController::is_connected() === false) {
             include "./view/home_page.php";
         } elseif (PydioController::is_connected() === true) {
             include "./view/list_ws.php";
-        } 
+        }
     } else {
         if (PydioController::check_pydio_path() === true && PydioController::is_connected() === false) {
             include "./view/login.php";
