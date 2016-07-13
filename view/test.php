@@ -12,7 +12,9 @@
         <div class="row mui-panel">
             <h1 class="title">Welcome to Pydio-test !!</h1>
             <h2 class="title">You can test your Pydio here !!</h2>
+            <h2 class="title">You must be an admin in Pydio to test it !!</h2>
         </div>
+        <div class="row" id="div_error"></div>
         <div class="row col s12">
             <div class="input-field col s6">
                 <i class="material-icons prefix">face</i>
@@ -29,6 +31,7 @@
                 <button class="waves-effect btn-flat" id="connexion">Connexion</button>
             </div>
         </div>
+        <div id="list_ws"></div>
     </div>
 </body>
 </html>
