@@ -100,9 +100,6 @@ a:focus {
 .collapsible-header {
 	text-align: center;
 }
-.collapsible-body {
-	text-align: initial;
-}
 .collapsible-body p {
 	padding: 0rem;
 }
