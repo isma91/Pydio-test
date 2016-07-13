@@ -59,4 +59,15 @@ class PydioController extends Pydio
 			return false;
 		}
 	}
+
+	private function _get_pydio_url ()
+	{
+		if (!self::check_pydio_path()) {
+			$this->_send_json("Pydio Path empty !!", null);
+			return false;
+		}
+		$pydio_path = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "pydio_path");
+		preg_match('/url=(.*?)$/', $pydio_path, $pydio_url);
+		return $pydio_url[1];
+	}
 }
