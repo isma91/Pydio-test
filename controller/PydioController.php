@@ -163,4 +163,25 @@ class PydioController extends Pydio
 		$_SESSION["pydio_test_id_ws"] = $id_ws;
 		$this->_send_json(null, null);
 	}
+
+	public function get_workspace_name ()
+	{
+		$pydio_url = $this->_get_pydio_url();
+		$url_list_workspace = "api/0/state/user/repositories?format=json";
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $pydio_url . $url_list_workspace);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/xml", "Ajxp-Force-Login: true"));
+		curl_setopt($curl, CURLOPT_USERPWD, $_SESSION["pydio_test_login"] . ":" . $_SESSION["pydio_test_password"]);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		$return = json_decode(curl_exec($curl), true);
+		curl_close($curl);
+		$workspace_name = "";
+		foreach ($return["repositories"]["repo"] as $workspace) {
+			if ($workspace["@id"] == $_SESSION["pydio_test_id_ws"]) {
+				$workspace_name = $workspace["label"];
+				break;
+			}
+		}
+		$this->_send_json(null, $workspace_name);
+	}
 }
