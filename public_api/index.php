@@ -28,6 +28,9 @@ switch ($_POST["action"]) {
 	case 'list_workspace':
 	$pydio->list_workspace();
 	break;
+	case 'select_ws':
+	$pydio->select_ws($_POST["id_ws"]);
+	break;
 	default:
 	echo json_encode(array("error" => "Not a valid action !!", "data" => null));
 	break;
