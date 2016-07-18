@@ -34,6 +34,24 @@ switch ($_POST["action"]) {
 	case 'get_workspace_name':
 	$pydio->get_workspace_name();
 	break;
+	case 'api_create_file':
+	$pydio->api_create_file($_POST["file_name"]);
+	break;
+	case 'api_create_folder':
+	$pydio->api_create_folder();
+	break;
+	case 'api_rename_file':
+	$pydio->api_rename_file();
+	break;
+	case 'api_copy_file':
+	$pydio->api_copy_file();
+	break;
+	case 'api_delete_file':
+	$pydio->api_delete_file();
+	break;
+	case 'api_move_file':
+	$pydio->api_move_file();
+	break;
 	default:
 	echo json_encode(array("error" => "Not a valid action !!", "data" => null));
 	break;
