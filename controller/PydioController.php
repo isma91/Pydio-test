@@ -156,4 +156,11 @@ class PydioController extends Pydio
 		curl_close($curl);
 		$this->_send_json(null, $return["repositories"]["repo"]);
 	}
+
+	public function select_ws ($id_ws)
+	{
+		$pydio_url = $this->_get_pydio_url();
+		$_SESSION["pydio_test_id_ws"] = $id_ws;
+		$this->_send_json(null, null);
+	}
 }
