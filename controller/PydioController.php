@@ -184,4 +184,30 @@ class PydioController extends Pydio
 		}
 		$this->_send_json(null, $workspace_name);
 	}
+
+	private function _parse_xml_response($xml_response)
+	{
+		$xml = new \SimpleXMLElement($xml_response);
+		$json = json_encode($xml);
+		$json = json_decode($json, true);
+		$message = $json["message"];
+		$error = null;
+		$data = null;
+		if ($message === "This file already exists (names are case insensitive)") {
+			$error = $message;
+		}
+		$this->_send_json($error, $data);
+	}
+
+	public function api_create_file($file_name)
+	{
+		$pydio_url = $this->_get_pydio_url();
+		$url_create_file = "api/" . $_SESSION["pydio_test_id_ws"] . "/mkfile/" . $file_name;
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $pydio_url . $url_create_file);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/xml", "Ajxp-Force-Login: true"));
+		curl_setopt($curl, CURLOPT_USERPWD, $_SESSION["pydio_test_login"] . ":" . $_SESSION["pydio_test_password"]);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		$this->_parse_xml_response(curl_exec($curl));
+	}
 }
