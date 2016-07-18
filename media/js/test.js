@@ -34,20 +34,37 @@ $(document).ready(function () {
             Materialize.toast("<p class='alert-failed'>Something is wrong while we try to get the workspace name !!<p>", 3000, "rounded alert-failed");
         }
     });
-    $(document).on("click", "#create_file_button", function(event) {
-        event.preventDefault();
-        $.post(path_to_ajax, {action: 'api_create_file'}, function(data, textStatus) {
-            if (textStatus === "success") {
-                data = JSON.parse(data);
-                if (data.error === null) {
-                } else {
-                    Materialize.toast("<p class='alert-failed'>" + data.error + "<p>", 3000, "rounded alert-failed");
-                }
-            } else {
-                Materialize.toast("<p class='alert-failed'>Something is wrong while we try to test the API !!<p>", 3000, "rounded alert-failed");
+    function press_enter(selector, go_function) {
+        $(document).on("keyup", selector, function (event) {
+            if (event.keyCode === 13) {
+                go_function();
             }
         });
+    }
+    function api_create_file () {
+        $("#create_file_div").html("");
+        if ($.trim($("#api_create_file_input").val()) !== "") {
+            $.post(path_to_ajax, {action: 'api_create_file', file_name : $.trim($("#api_create_file_input").val())}, function(data, textStatus) {
+                if (textStatus === "success") {
+                    data = JSON.parse(data);
+                    if (data.error === null) {
+                        Materialize.toast("<p class='alert-success'>File created successfully !!<p>", 3000, "rounded alert-success");
+                    } else {
+                        Materialize.toast("<p class='alert-failed'>" + data.error + "<p>", 3000, "rounded alert-failed");
+                    }
+                } else {
+                    Materialize.toast("<p class='alert-failed'>Something is wrong while we try to test the API !!<p>", 3000, "rounded alert-failed");
+                }
+            });
+        } else {
+            $("#create_file_div").html("<div class='row' id='div_error'>Name of the file EMPTY !!</div>");
+        }
+    }
+    $(document).on("click", "#create_file_button", function(event) {
+        event.preventDefault();
+        api_create_file();
     });
+    press_enter("#api_create_file_input", api_create_file);
     $(document).on("click", "#create_folder_button", function(event) {
         event.preventDefault();
         $.post(path_to_ajax, {action: 'api_create_folder'}, function(data, textStatus) {
