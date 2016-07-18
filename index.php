@@ -43,6 +43,9 @@ if ($_GET) {
         case 'list_ws':
         go_to_view("list_ws");
         break;
+        case 'test':
+        go_to_view("test");
+        break;
         default:
         go_to_view('home_page');
         break;
