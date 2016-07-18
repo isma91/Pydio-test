@@ -88,7 +88,7 @@ $(document).ready(function () {
             if (textStatus === "success") {
                 data = JSON.parse(data);
                 if (data.error === null) {
-                    Materialize.toast("<p class='alert-success'>Worskapce selected successfullly !!<p>", 1000, "rounded alert-success");
+                    Materialize.toast("<p class='alert-success'>Workspace selected successfullly !!<p>", 1000, "rounded alert-success");
                     setTimeout(function () {
                         window.location = "?page=test";
                     }, 1000);
